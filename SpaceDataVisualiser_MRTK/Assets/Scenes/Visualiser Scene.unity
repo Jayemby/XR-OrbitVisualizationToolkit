@@ -619,6 +619,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114027088701872886, guid: 36897f7b9fde8ab478b0652bfbf11ea3,
+        type: 3}
+      propertyPath: localpath
+      value: Z:\git\SpaceDataVisualiser\MissionJSONs\defaultMission.json
+      objectReference: {fileID: 0}
     - target: {fileID: 114058498480301652, guid: 36897f7b9fde8ab478b0652bfbf11ea3,
         type: 3}
       propertyPath: m_textAlignment
@@ -924,6 +929,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 223952285788812652, guid: 36897f7b9fde8ab478b0652bfbf11ea3,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 224021216767761056, guid: 36897f7b9fde8ab478b0652bfbf11ea3,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1046,6 +1056,12 @@ PrefabInstance:
     - {fileID: 114496618436218804, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
     - {fileID: 114313277336288954, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
     - {fileID: 114584718317100584, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
+    - {fileID: 114660946033135526, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
+    - {fileID: 114324485119539758, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
+    - {fileID: 114669094703652738, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
+    - {fileID: 114942673868378418, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
+    - {fileID: 114178788415732416, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
+    - {fileID: 114377881935480880, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
 --- !u!1001 &1364039899
 PrefabInstance:
