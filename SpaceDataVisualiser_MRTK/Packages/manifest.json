@@ -7,9 +7,15 @@
         "com.microsoft.mixedreality",
         "com.microsoft.spatialaudio"
       ]
+    },
+    {
+      "name": "Packages from jillejr",
+      "url": "https://npm.cloudsmith.io/jillejr/newtonsoft-json-for-unity/",
+      "scopes": ["jillejr"]
     }
   ],
   "dependencies": {
+    "jillejr.newtonsoft.json-for-unity": "12.0.201",
     "com.microsoft.mixedreality.toolkit.examples": "2.5.1",
     "com.microsoft.mixedreality.toolkit.foundation": "2.5.1",
     "com.microsoft.mixedreality.toolkit.tools": "2.5.1",

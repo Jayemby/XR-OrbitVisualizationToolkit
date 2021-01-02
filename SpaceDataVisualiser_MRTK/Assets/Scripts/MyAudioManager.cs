@@ -30,11 +30,9 @@ public class MyAudioManager : MonoBehaviour {
     public void Play(string Name)
     {
         Sound s = Array.Find(sounds, sound => sound.clipname == Name);
-        if (s == null || s.source == null)
-        {
-            return;
-        }
-        else if (!s.source.isPlaying)
+        if (s == null)
+            return;        
+        if (!s.source.isPlaying)
         {
             s.source.Play();
             Debug.Log("playing sound: " + Name);
