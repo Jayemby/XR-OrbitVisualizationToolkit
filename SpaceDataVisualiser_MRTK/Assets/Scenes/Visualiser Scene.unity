@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 223974232}
   - component: {fileID: 223974231}
   - component: {fileID: 223974233}
+  - component: {fileID: 223974235}
   - component: {fileID: 223974234}
   m_Layer: 0
   m_Name: ManipulatorHandle
@@ -186,7 +187,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &223974228
 MeshRenderer:
@@ -243,7 +244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223974226}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.020617515, y: -0.522, z: 1.249}
+  m_LocalPosition: {x: 0.020617515, y: -0.158, z: 0.942}
   m_LocalScale: {x: 0.8, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -325,13 +326,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223974226}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff5df7a2c3b5b4843bdc23997f95edc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b3e6359c9750ad4fb8a05c9b8704d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handType: -1
+  handType: 3
   proximityType: 3
+  constraintOnRotation: 4
+  useLocalSpaceForConstraint: 0
+--- !u!114 &223974235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223974226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e6359c9750ad4fb8a05c9b8704d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: 3
+  proximityType: 3
+  constraintOnRotation: 1
+  useLocalSpaceForConstraint: 0
 --- !u!1 &272007282 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1351726389746662, guid: 36897f7b9fde8ab478b0652bfbf11ea3,
@@ -708,15 +727,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4801446788528242, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.020617515
       objectReference: {fileID: 0}
     - target: {fileID: 4801446788528242, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.71578926
+      value: -0.328
       objectReference: {fileID: 0}
     - target: {fileID: 4801446788528242, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.5059999
+      value: 1.099
       objectReference: {fileID: 0}
     - target: {fileID: 4801446788528242, guid: 36897f7b9fde8ab478b0652bfbf11ea3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -749,7 +768,7 @@ PrefabInstance:
     - target: {fileID: 114027088701872886, guid: 36897f7b9fde8ab478b0652bfbf11ea3,
         type: 3}
       propertyPath: localpath
-      value: 
+      value: Z:\git\SpaceDataVisualiser\MissionJSONs\defaultMission.json
       objectReference: {fileID: 0}
     - target: {fileID: 114058498480301652, guid: 36897f7b9fde8ab478b0652bfbf11ea3,
         type: 3}
@@ -1288,6 +1307,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114819254163817120, guid: 82eeead95bd63a349a0ecae9b14e97f7,
+        type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82eeead95bd63a349a0ecae9b14e97f7, type: 3}
 --- !u!1 &1364039900 stripped
@@ -1329,10 +1353,10 @@ ParentConstraint:
   m_GameObject: {fileID: 2079901591}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: -0.71578926, z: 1.5059999}
+  m_TranslationAtRest: {x: 0.020617515, y: -0.328, z: 1.099}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.020617515, y: -0.19378924, z: 0.25699997}
+  - {x: 0, y: -0.17, z: 0.157}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1

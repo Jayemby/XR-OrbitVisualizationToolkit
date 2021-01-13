@@ -87,10 +87,8 @@ public class TimeManipulator : MonoBehaviour {
         List<Vector3> Localpositions = new List<Vector3>();
         for (int i = 0; i < OM.RawPositions.Count; i++)
         {
-            Vector3 localisedposition = new Vector3(
-                (OM.RawPositions[i].x + OM.CurrentPosition.x) * OM.CurrentScale.x,
-                (OM.RawPositions[i].y + OM.CurrentPosition.y) * OM.CurrentScale.y,
-                (OM.RawPositions[i].z + OM.CurrentPosition.z) * OM.CurrentScale.z);
+            Vector3 localisedposition = Vector3.Scale((Vector3.Scale(OM.RawPositions[i], transform.parent.parent.localScale) + OM.CurrentPosition), OM.CurrentScale);
+
             Localpositions.Add(localisedposition);
         }
         Vector3[] positions = Localpositions.ToArray();
@@ -135,8 +133,8 @@ public class TimeManipulator : MonoBehaviour {
      * Params:
      * @int distributed DateTime elements
      */
-    //------------------------------------------------------------------------------
-    public static double JD(int y, int m, int d, int hh, int mm, int ss)
+            //------------------------------------------------------------------------------
+            public static double JD(int y, int m, int d, int hh, int mm, int ss)
     {
         // Explanatory Supplement to the Astronomical Almanac, S.E. Urban and P.K. Seidelman (Eds.), 2012
         int jd = (1461 * (y + 4800 + (m - 14) / 12)) / 4 + (367 * (m - 2 - 12 * ((m - 14) / 12))) / 12 - (3 * ((y + 4900 + (m - 14) / 12) / 100)) / 4 + d - 32075;

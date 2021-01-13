@@ -77,7 +77,7 @@ public class OrbitManagement : MonoBehaviour
         DefaultScale = transform.localScale.x; //get current scale        
         newscale = DefaultScale; //setnewscale to currentscale        
         OrbiterStartingScale = Radius * 2; //set orbiterstartingscale
-        Orbiter.transform.localScale = new Vector3(OrbiterStartingScale, OrbiterStartingScale, OrbiterStartingScale);
+        Orbiter.transform.localScale = Vector3.Scale(new Vector3(OrbiterStartingScale, OrbiterStartingScale, OrbiterStartingScale), transform.parent.parent.localScale);
         NewRadius = Radius; //Set NewRadius to Radius        
         DefaultTolerance = 0; //set tolerance starting value        
         newtolerance = DefaultTolerance; //set newtolerance to currenttolerance        
@@ -212,6 +212,7 @@ public class OrbitManagement : MonoBehaviour
         if (NewRadius != Radius)
         {
             float NewOrbiterScale = Radius * 2;
+
             Orbiter.transform.localScale = new Vector3(NewOrbiterScale, NewOrbiterScale, NewOrbiterScale);
             NewRadius = Radius;
         }
@@ -241,9 +242,12 @@ public class OrbitManagement : MonoBehaviour
                 orbitalpositions.Clear(); //clear any previously saved positions            
                 var simplifiedpoints = new List<Vector3>();
                 LineUtility.Simplify(RawPositions, newtolerance, simplifiedpoints); //simplify list of raw positions to optimise line rendering if needed
+
                 for (int i = 0; i < simplifiedpoints.Count; i++)
                 {
-                    Vector3 LocalPos = new Vector3(simplifiedpoints[i].x + CurrentPosition.x, simplifiedpoints[i].y + CurrentPosition.y, simplifiedpoints[i].z + CurrentPosition.z);
+
+                    Vector3 currentPointScaled = Vector3.Scale(simplifiedpoints[i], transform.parent.parent.localScale);
+                    Vector3 LocalPos = currentPointScaled + CurrentPosition;
                     orbitalpositions.Add(LocalPos);
                 }
                 RenderPoints();
@@ -326,6 +330,13 @@ public class OrbitManagement : MonoBehaviour
 
         if (!UseRotation)
         {
+            //Vector3 UIScaleVector = transform.parent.parent.localScale;            
+
+            //for (int i = 0; i < orbitalpositions.Count; i++)
+            //{
+            //    orbitalpositions[i] = (Vector3.Scale((orbitalpositions[i] - CurrentPosition), UIScaleVector) + CurrentPosition);
+            //}
+
             for (int i = 0; i < orbitalpositions.Count; i++)
             {
                 LR.SetPosition(i, orbitalpositions[i]); //set Line renderer positions
