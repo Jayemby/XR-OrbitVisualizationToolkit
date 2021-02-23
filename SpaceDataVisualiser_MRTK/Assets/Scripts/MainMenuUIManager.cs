@@ -227,7 +227,7 @@ public class MainMenuUIManager : MonoBehaviour {
             GlobalShapeToleranceSet();
             NumbersCrunched = false;
         }
-        MainMenuCanvas.SetActive(IsEnabled);
+        //MainMenuCanvas.SetActive(IsEnabled);
         TimeStepSlider.interactable = UseTimeStepToggle.isOn;
         if (NewHeightSliderValue != (int)HeightSlider.value)
         {

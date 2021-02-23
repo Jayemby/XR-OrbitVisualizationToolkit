@@ -16,7 +16,10 @@
 
         public OrbitalDataUnity(OrbitalData data)
         {
-            this.Info = data.Info;
+            if (data.Info != null)
+            {
+                this.Info = data.Info;
+            }
             this.Orbits = new List<OrbitUnity>();
             foreach (Orbit orbit in data.Orbits)
             {

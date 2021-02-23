@@ -77,7 +77,7 @@ public class OrbitManagement : MonoBehaviour
         DefaultScale = transform.localScale.x; //get current scale        
         newscale = DefaultScale; //setnewscale to currentscale        
         OrbiterStartingScale = Radius * 2; //set orbiterstartingscale
-        Orbiter.transform.localScale = Vector3.Scale(new Vector3(OrbiterStartingScale, OrbiterStartingScale, OrbiterStartingScale), transform.parent.parent.localScale);
+        Orbiter.transform.localScale = Vector3.Scale(new Vector3(OrbiterStartingScale, OrbiterStartingScale, OrbiterStartingScale), transform.parent.localScale);
         NewRadius = Radius; //Set NewRadius to Radius        
         DefaultTolerance = 0; //set tolerance starting value        
         newtolerance = DefaultTolerance; //set newtolerance to currenttolerance        
@@ -246,7 +246,7 @@ public class OrbitManagement : MonoBehaviour
                 for (int i = 0; i < simplifiedpoints.Count; i++)
                 {
 
-                    Vector3 currentPointScaled = Vector3.Scale(simplifiedpoints[i], transform.parent.parent.localScale);
+                    Vector3 currentPointScaled = Vector3.Scale(simplifiedpoints[i], transform.parent.localScale);
                     Vector3 LocalPos = currentPointScaled + CurrentPosition;
                     orbitalpositions.Add(LocalPos);
                 }

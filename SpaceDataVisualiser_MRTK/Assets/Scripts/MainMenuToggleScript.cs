@@ -13,15 +13,15 @@ public class MainMenuToggleScript : MonoBehaviour {
     {
         if (MainMenuCanvas.activeSelf == true)
         {
-            Pedestal.GetComponent<MainMenuUIManager>().ClosePanel();
+            //Pedestal.GetComponent<MainMenuUIManager>().ClosePanel();
         }
         else
         {
             if(SatelliteMenu.activeSelf == true)
             {
-                SatelliteMenu.GetComponent<SatelliteCanvasManager>().ClosePanel();                
+                //SatelliteMenu.GetComponent<SatelliteCanvasManager>().ClosePanel();                
             }
-            Pedestal.GetComponent<MainMenuUIManager>().IsEnabled = true;
+            //Pedestal.GetComponent<MainMenuUIManager>().IsEnabled = true;
         }
     }
 	
