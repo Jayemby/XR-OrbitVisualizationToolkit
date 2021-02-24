@@ -14,6 +14,7 @@ public class HandMenuManager : MonoBehaviour
         if (menuTools.Length > 0)
         {
             menuTools[currentTool].gameObject.SetActive(false);
+
             if (currentTool == (menuTools.Length - 1))
             {
                 currentTool = 0;
@@ -23,6 +24,7 @@ public class HandMenuManager : MonoBehaviour
                 currentTool++;
             }
             menuTools[currentTool].gameObject.SetActive(true);
+
         }
     }
 
@@ -32,6 +34,7 @@ public class HandMenuManager : MonoBehaviour
         if (menuTools.Length > 0)
         {
             menuTools[currentTool].gameObject.SetActive(false);
+
             if (currentTool == 0)
             {
                 currentTool = (menuTools.Length - 1);
@@ -43,5 +46,17 @@ public class HandMenuManager : MonoBehaviour
             menuTools[currentTool].gameObject.SetActive(true);
         }
 
+    }
+
+    public void HideTool()
+    {
+        Debug.Log("Hide Tool!");
+        menuTools[currentTool].gameObject.SetActive(false);
+    }
+
+    public void ShowTool()
+    {
+        Debug.Log("Show Tool!");
+        menuTools[currentTool].gameObject.SetActive(true);
     }
 }
