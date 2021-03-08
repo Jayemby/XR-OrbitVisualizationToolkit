@@ -443,7 +443,6 @@ public class MainMenuUIManager : MonoBehaviour {
             //NewJulianDate = AllTimes[0] + GlobalJulianDateSlider.value * (AllTimes[AllTimes.Count - 1] - AllTimes[0]);
         }
     }
-
     //------------------------------------------------------------------------------
     // public int IndexFromJD()
     //------------------------------------------------------------------------------
