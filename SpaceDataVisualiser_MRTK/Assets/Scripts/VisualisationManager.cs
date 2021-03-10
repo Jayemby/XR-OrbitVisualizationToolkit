@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using QuickType;
 
+
 public class VisualisationManager : MonoBehaviour
 {
     // Data management variables:
@@ -50,7 +51,7 @@ public class VisualisationManager : MonoBehaviour
     private List<double> m_rawTimes;
     [SerializeField] private List<double> m_allTimes;
 
-
+    [SerializeField] private List<GameObject> m_UIRecievers;
 
     // Data scale values:
     public int m_scaleValue;
@@ -140,9 +141,43 @@ public class VisualisationManager : MonoBehaviour
     #endregion
 
     #region Time Methods
-    public double GetJulianDate()
+    public double GetJulianDate_Raw()
     {
         return m_julianDate;
+    }
+
+    public string GetJulianDate_String()
+    {
+        string julianDateString = "";
+        
+        int Y = 0, M = 0, D = 0, hh = 0, mm = 0, ss = 0;
+
+        YMDhms(m_julianDate, ref Y, ref M, ref D, ref hh, ref mm, ref ss, true);
+
+        julianDateString = $"{Y}/{M:00}/{D:00} {hh:00}:{mm:00}:{ss:00}";
+
+        return julianDateString;
+    }
+
+    public static void YMDhms(double JD, ref int Y, ref int M, ref int D, ref int hh, ref int mm, ref int ss,
+                            bool offset)
+    {
+        if (offset)
+            JD += 2430000f;
+        int J = (int)(JD + 0.5);
+        int f = J + 1401 + (((4 * J + 274277) / 146097) * 3) / 4 - 38;
+        int e = 4 * f + 3;
+        int g = (e % 1461) / 4;
+        int h = 5 * g + 2;
+        D = (h % 153) / 5 + 1;
+        M = ((h / 153 + 2) % 12) + 1;
+        Y = e / 1461 - 4716 + (14 - M) / 12;
+        double rem = (JD - J) + 0.5;
+        hh = (int)(rem * 24);
+        rem = rem * 24 - hh;
+        mm = (int)(rem * 60);
+        rem = rem * 60 - mm;
+        ss = (int)(rem * 60);
     }
 
     public void SetJulianDate(double i_JulianDate)
@@ -593,6 +628,12 @@ public class VisualisationManager : MonoBehaviour
                 // set NewJulian date to current JulianDate + scaled timestep increment 
                 newJulianDate = m_julianDate + (m_timeStep / (1 / m_updateFrequency));
 
+                if (newJulianDate > m_allTimes[m_allTimes.Count - 1])
+                {
+                    // If the visuisation goes past the last time point then reset to the beginning
+                    newJulianDate = m_allTimes[0];
+                }
+
                 // Distribute JulianDate here
                 if (m_julianDate != newJulianDate)
                 {
@@ -626,5 +667,108 @@ public class VisualisationManager : MonoBehaviour
                 // The visualisation is paused, no update is needed
                 break;
         }
+    }
+
+
+
+
+    public void SetTimeStatus_SingleUpdate()
+    {
+        m_currentTimeStatus = TimeStatus.SingleUpdate;
+    }
+    public void SetTimeStatus_Paused()
+    {
+        m_currentTimeStatus = TimeStatus.Paused;
+    }
+
+    public void SetTimeStatus_UseTimeStep()
+    {
+        m_currentTimeStatus = TimeStatus.UseTimeStep;
+    }
+
+    public void SetTimeStatus_UseRealTime()
+    {
+        m_currentTimeStatus = TimeStatus.UseRealTime;
+    }
+
+    public string GetVisualisationUnits()
+    {
+        return m_orbitalDataUnity.Info.Units;
+    }
+
+    public void SetJulianDateFromControl(float i_controlValue)
+    {
+        // Debug.Log("Setting julian date from control");
+        // Gets value between 0 and 1
+
+        if (i_controlValue > 1)
+        {
+            i_controlValue = 1;
+        }
+        else if (i_controlValue < 0)
+        {
+            i_controlValue = 0;
+        }
+
+        // We need to use this value to get a date from our list to use
+
+        float dateIndexFloat = i_controlValue * m_allTimes.Count;
+        // Debug.Log(dateIndexFloat);
+
+        int dateIndexInt = Mathf.RoundToInt(dateIndexFloat);
+
+        // Debug.Log(dateIndexInt);
+
+        m_julianDate = m_allTimes[dateIndexInt];
+
+        if (m_currentTimeStatus == TimeStatus.Paused)
+        {
+            m_currentTimeStatus = TimeStatus.SingleUpdate;
+        }
+
+    }
+
+    public bool GetTimeStatus_TimeStep()
+    {
+        bool o_TimeStepStatus = false;
+
+        if (m_currentTimeStatus == TimeStatus.UseTimeStep)
+        {
+            o_TimeStepStatus = true;
+        }
+
+        return o_TimeStepStatus;
+    }
+
+    public bool GetTimeStatus_RealTime()
+    {
+        bool o_RealTimeStatus = false;
+
+        if (m_currentTimeStatus == TimeStatus.UseRealTime)
+        {
+            o_RealTimeStatus = true;
+        }
+
+        return o_RealTimeStatus;
+    }
+
+    public float GetTimeProgress()
+    {
+        // Returns a value between 0 and 1 for where the visuisation is in the list of times
+        float timeValue = 0;
+
+        double firstTime = m_allTimes[0];
+
+        double lastTime = m_allTimes[m_allTimes.Count - 1];
+
+        double duration = lastTime - firstTime;
+
+        double currentProgress = m_julianDate - firstTime;
+
+        timeValue = (float)(currentProgress / duration);
+
+        Debug.Log(timeValue);
+
+        return timeValue;
     }
 }

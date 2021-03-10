@@ -918,7 +918,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 615137697}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1258537318}
@@ -2091,12 +2091,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82eeead95bd63a349a0ecae9b14e97f7, type: 3}
---- !u!1 &1364039900 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1117199058873254, guid: 82eeead95bd63a349a0ecae9b14e97f7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1364039899}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1455036158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2363,6 +2357,7 @@ MonoBehaviour:
   m_currentTimeStatus: 2
   m_timeStep: 0.00011574074
   m_allTimes: []
+  m_UIRecievers: []
   m_scaleValue: 0
 --- !u!4 &1803405911
 Transform:
@@ -2438,26 +2433,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe5232c64bbea64298da8fe57890786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VisualisationManager: {fileID: 1803405909}
   m_globalLineToggle: {fileID: 0}
   m_globalTagToggle: {fileID: 0}
   m_globalLineWidthSlider: {fileID: 0}
   m_globalShapeToleranceSlider: {fileID: 0}
   m_globalScaleSlider: {fileID: 0}
   m_globalRealTimeToggle: {fileID: 0}
-  m_globalJulianDateSlider: {fileID: 0}
   m_timeStepSlider: {fileID: 0}
   m_heightSlider: {fileID: 0}
   m_useRotationToggle: {fileID: 0}
   m_globalLinewidthtext: {fileID: 0}
   m_globalShapeTolerancetext: {fileID: 0}
   m_globalScaletext: {fileID: 0}
-  m_globalJulianDatetext: {fileID: 0}
-  m_globalJulianDateTextAlt: {fileID: 0}
   m_unitsText: {fileID: 0}
   m_timeStepText: {fileID: 0}
   m_heightSliderValueText: {fileID: 0}
+  m_realTimeToggle: {fileID: 114454547086987121}
+  m_julianDateSlider: {fileID: 114887972226981627}
   m_useTimeStepToggle: {fileID: 114760708418150289}
   m_coordinatesField: {fileID: 1229338548}
+  m_rawJulianDatetext: {fileID: 114616223897011143}
+  m_julianDateText: {fileID: 114237287854430437}
 --- !u!1 &2064077751
 GameObject:
   m_ObjectHideFlags: 0
@@ -3164,7 +3161,7 @@ GameObject:
   - component: {fileID: 222783905428421697}
   - component: {fileID: 114616223897011143}
   m_Layer: 5
-  m_Name: JulianDateValueText
+  m_Name: JulianDateTextRaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3910,7 +3907,7 @@ GameObject:
   - component: {fileID: 222081122408698657}
   - component: {fileID: 114237287854430437}
   m_Layer: 5
-  m_Name: JulianDateTextalt
+  m_Name: JulianDateText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4211,7 +4208,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4362275220723203}
   - component: {fileID: 114400666358898017}
-  - component: {fileID: 114687785337736299}
   m_Layer: 0
   m_Name: pedestal
   m_TagString: Untagged
@@ -6036,7 +6032,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114687785337736299}
+      - m_Target: {fileID: 0}
         m_MethodName: GlobalToggleLineDraw
         m_Mode: 1
         m_Arguments:
@@ -7810,7 +7806,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114687785337736299}
+      - m_Target: {fileID: 0}
         m_MethodName: ClosePanel
         m_Mode: 1
         m_Arguments:
@@ -8524,7 +8520,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114687785337736299}
+      - m_Target: {fileID: 0}
         m_MethodName: GlobalScaleSet
         m_Mode: 1
         m_Arguments:
@@ -8621,7 +8617,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114687785337736299}
+      - m_Target: {fileID: 0}
         m_MethodName: Realtimetoggled
         m_Mode: 1
         m_Arguments:
@@ -9217,7 +9213,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114687785337736299}
+      - m_Target: {fileID: 0}
         m_MethodName: GlobalLineWidthSet
         m_Mode: 1
         m_Arguments:
@@ -9831,7 +9827,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114687785337736299}
+      - m_Target: {fileID: 0}
         m_MethodName: UseRotation
         m_Mode: 1
         m_Arguments:
@@ -10149,57 +10145,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &114687785337736299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559048216789189}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b95cba173f1efb941b8fb891e1065cee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalLineToggle: {fileID: 114041757700252173}
-  GlobalTagToggle: {fileID: 114959532033181079}
-  GlobalLineWidthSlider: {fileID: 114556743598468501}
-  GlobalShapeToleranceSlider: {fileID: 114713242126938819}
-  GlobalScaleSlider: {fileID: 114410366582745691}
-  GlobalRealTimeToggle: {fileID: 114454547086987121}
-  GlobalJulianDateSlider: {fileID: 114887972226981627}
-  UseTimeStepToggle: {fileID: 114760708418150289}
-  TimeStepSlider: {fileID: 114511374115406789}
-  HeightSlider: {fileID: 114639407859056565}
-  UseRotationToggle: {fileID: 114624088385598583}
-  TakeMenuWithMeToggle: {fileID: 0}
-  GlobalLinewidthtext: {fileID: 114138508982363327}
-  GlobalShapeTolerancetext: {fileID: 114715151072022275}
-  GlobalScaletext: {fileID: 114236138608406333}
-  GlobalJulianDatetext: {fileID: 114616223897011143}
-  GlobalJulianDateTextAlt: {fileID: 114237287854430437}
-  CoordinatesText: {fileID: 114774597389141245}
-  UnitsText: {fileID: 114738741599322829}
-  TimeStepText: {fileID: 114304354398877057}
-  HeightSliderValueText: {fileID: 114123832731603309}
-  TakeMenuWithMeText: {fileID: 0}
-  OrbitManagers: []
-  JsonManager: {fileID: 1668660792207787}
-  SatelliteCanvas: {fileID: 1676023467425201}
-  MainMenuCanvas: {fileID: 1437601072468591}
-  MainMenuLabelCanvas: {fileID: 1351726767538561}
-  LoadDataCanvas: {fileID: 1381320957304349}
-  AudioManager: {fileID: 1364039900}
-  TimeSliderUpdated: 0
-  JulianDate: 0
-  NewJulianDate: 0
-  OrbitsCreated: 0
-  AllTimes: []
-  NewScaleValue: 0
-  IsEnabled: 0
-  updateFrequency: 0.05
-  applyGmatOffset: 1
-  restart: 0
 --- !u!114 &114699508358503487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10508,7 +10453,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114687785337736299}
+      - m_Target: {fileID: 0}
         m_MethodName: GlobalShapeToleranceSet
         m_Mode: 1
         m_Arguments:
@@ -10946,9 +10891,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: Play
-        m_Mode: 5
+      - m_Target: {fileID: 1937631122}
+        m_MethodName: TimeStepToggle_ValueChange
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11649,13 +11594,13 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
-  m_WholeNumbers: 1
-  m_Value: 1
+  m_WholeNumbers: 0
+  m_Value: 0.087
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114687785337736299}
-        m_MethodName: GlobalJulianTime
+      - m_Target: {fileID: 1937631122}
+        m_MethodName: JulianDate_ValueChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12457,7 +12402,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114687785337736299}
+      - m_Target: {fileID: 0}
         m_MethodName: GlobalToggleTags
         m_Mode: 1
         m_Arguments:
@@ -15073,7 +15018,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5, y: 0}
+  m_AnchoredPosition: {x: 4.9999924, y: 0}
   m_SizeDelta: {x: 22, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224610446317365399
