@@ -71,7 +71,8 @@ public class OrbitManagement : MonoBehaviour
     public void Start()
     {        
         //cache Line renderer to avoid multiple calls.
-        LR = gameObject.GetComponent<LineRenderer>();        
+        LR = gameObject.GetComponent<LineRenderer>();
+        LR.useWorldSpace = false;
 
         #region Default Values Setup        
         DefaultScale = transform.localScale.x; //get current scale        
@@ -153,7 +154,7 @@ public class OrbitManagement : MonoBehaviour
         #region Transform/Scale changes
         // this is solely responsibly for updating the line renderer when the scale changes
         // therefore, scaleChanged condition used here 
-        if ((CurrentPosition != transform.position) || (scaleChanged))
+        if ((CurrentPosition != transform.position) || (scaleChanged) || (CurrentScale != transform.localScale))
         {
             if (!UseRotation)
             {
@@ -168,13 +169,9 @@ public class OrbitManagement : MonoBehaviour
                 orbitalobjects.Clear();
             }
             CurrentPosition = transform.position;
+            CurrentScale = transform.localScale;
             ObjectGenerator();
             scaleChanged = false;
-        }
-
-        if (CurrentScale != transform.localScale)
-        {
-            CurrentScale = transform.localScale;
         }
         #endregion
 
@@ -247,7 +244,7 @@ public class OrbitManagement : MonoBehaviour
                 {
 
                     Vector3 currentPointScaled = Vector3.Scale(simplifiedpoints[i], transform.parent.localScale);
-                    Vector3 LocalPos = currentPointScaled + CurrentPosition;
+                    Vector3 LocalPos = currentPointScaled;// + CurrentPosition;
                     orbitalpositions.Add(LocalPos);
                 }
                 RenderPoints();
@@ -339,13 +336,18 @@ public class OrbitManagement : MonoBehaviour
 
             for (int i = 0; i < orbitalpositions.Count; i++)
             {
+                //LR.SetPosition(i, Vector3.Scale(orbitalpositions[i], gameObject.transform.localScale)); //set Line renderer positions
+
                 LR.SetPosition(i, orbitalpositions[i]); //set Line renderer positions
+                
             }
         }
         if (UseRotation)
         {
             for (int i = 0; i < orbitalobjects.Count; i++)
             {
+                //LR.SetPosition(i, Vector3.Scale(orbitalobjects[i].transform.position, gameObject.transform.localScale));
+
                 LR.SetPosition(i, orbitalobjects[i].transform.position);
             }
         }

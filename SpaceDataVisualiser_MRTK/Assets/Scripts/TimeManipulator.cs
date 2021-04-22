@@ -87,7 +87,7 @@ public class TimeManipulator : MonoBehaviour {
         List<Vector3> Localpositions = new List<Vector3>();
         for (int i = 0; i < OM.RawPositions.Count; i++)
         {
-            Vector3 localisedposition = Vector3.Scale((Vector3.Scale(OM.RawPositions[i], transform.parent.localScale) + OM.CurrentPosition), OM.CurrentScale);
+            Vector3 localisedposition = Vector3.Scale((Vector3.Scale(OM.RawPositions[i], transform.parent.localScale)), OM.CurrentScale) + OM.CurrentPosition;
 
             Localpositions.Add(localisedposition);
         }

@@ -10,7 +10,7 @@ public class VisualisationManager : MonoBehaviour
     // Data management variables:
     [SerializeField] private GameObject m_orbitManagerPrefab;
     private GameObject[] m_orbitManagers;
-    public string m_localFilePath = null;
+    public string m_localFilePath = "";
     private string m_jsonData;
     private OrbitalDataUnity m_orbitalDataUnity;
 
@@ -26,7 +26,7 @@ public class VisualisationManager : MonoBehaviour
         Ready
     }
 
-    private LoadStatus m_CurrentStatus = LoadStatus.WaitingForFilepath;
+    [SerializeField] private LoadStatus m_currentStatus = LoadStatus.WaitingForFilepath;
 
     // Global Visualisation Variables:
     [SerializeField] private Vector3 m_visualisationOffset = new Vector3(0,0,0);
@@ -54,7 +54,10 @@ public class VisualisationManager : MonoBehaviour
     [SerializeField] private List<GameObject> m_UIRecievers;
 
     // Data scale values:
-    public int m_scaleValue;
+    private Vector3 m_UIScaleValue = new Vector3(1,1,1);
+
+    [SerializeField] private int m_scaleValue;
+
     //Scale Values
     private int m_scaleStartValue;
     private int m_scaleMinValue;
@@ -83,17 +86,17 @@ public class VisualisationManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(m_CurrentStatus)
+        switch(m_currentStatus)
         {
             case LoadStatus.WaitingForFilepath:
                 // We are currently waiting for a filepath to load from.
 
                 // Check to see if there is a filepath.
-                if (m_localFilePath != null)
+                if (m_localFilePath != "")
                 {
                     // A path exists
 
-                    m_CurrentStatus = LoadStatus.LoadingJson;
+                    m_currentStatus = LoadStatus.LoadingJson;
 
                     StartCoroutine(LoadJsonData());
 
@@ -111,7 +114,7 @@ public class VisualisationManager : MonoBehaviour
             case LoadStatus.LoadingComplete:
                 // The JSON loading is complete we should start the orbit update repeater:
                 InvokeRepeating(nameof(OrbitUpdate), 0, m_updateFrequency);
-                m_CurrentStatus = LoadStatus.Ready;
+                m_currentStatus = LoadStatus.Ready;
 
                 break;
 
@@ -128,9 +131,30 @@ public class VisualisationManager : MonoBehaviour
         return m_visualisationOffset;
     }
 
-    public void SetOffsetVector(Vector3 i_Offset)
+    public void SetOffsetVector(Vector3 i_offset)
     {
-        m_visualisationOffset = i_Offset;
+        m_visualisationOffset = i_offset;
+
+        if (m_orbitManagers != null)
+        {
+            for (int i = 0; i < m_orbitManagers.Length; i++)
+            {
+                m_orbitManagers[i].transform.localPosition = m_visualisationOffset;
+            }
+        }
+    }
+
+    public void SetUIScale(float i_scale)
+    {
+        m_visualisationScale = new Vector3(i_scale, i_scale, i_scale);
+
+        if (m_orbitManagers != null)
+        {
+            for (int i = 0; i < m_orbitManagers.Length; i++)
+            {
+                m_orbitManagers[i].transform.localScale = m_visualisationScale;
+            }
+        }
     }
 
     public void ResetOffsetVector()
@@ -222,7 +246,7 @@ public class VisualisationManager : MonoBehaviour
 
         // CurrentScale = ScaleValue;
 
-        m_CurrentStatus = LoadStatus.LoadingComplete;
+        m_currentStatus = LoadStatus.LoadingComplete;
 
 
         yield return null;
@@ -693,7 +717,17 @@ public class VisualisationManager : MonoBehaviour
 
     public string GetVisualisationUnits()
     {
-        return m_orbitalDataUnity.Info.Units;
+        if (m_orbitalDataUnity != null)
+        {
+            if (m_orbitalDataUnity.Info != null)
+            {
+                if (m_orbitalDataUnity.Info.Units != null)
+                {
+                    return m_orbitalDataUnity.Info.Units;
+                }
+            }
+        }
+        return "";
     }
 
     public void SetJulianDateFromControl(float i_controlValue)
@@ -754,21 +788,57 @@ public class VisualisationManager : MonoBehaviour
 
     public float GetTimeProgress()
     {
-        // Returns a value between 0 and 1 for where the visuisation is in the list of times
-        float timeValue = 0;
+        if (m_allTimes.Count > 0)
+        {
+            // Returns a value between 0 and 1 for where the visuisation is in the list of times
+            float timeValue = 0;
 
-        double firstTime = m_allTimes[0];
+            double firstTime = m_allTimes[0];
 
-        double lastTime = m_allTimes[m_allTimes.Count - 1];
+            double lastTime = m_allTimes[m_allTimes.Count - 1];
 
-        double duration = lastTime - firstTime;
+            double duration = lastTime - firstTime;
 
-        double currentProgress = m_julianDate - firstTime;
+            double currentProgress = m_julianDate - firstTime;
 
-        timeValue = (float)(currentProgress / duration);
+            timeValue = (float)(currentProgress / duration);
 
-        Debug.Log(timeValue);
+            // Debug.Log(timeValue);
 
-        return timeValue;
+            return timeValue;
+        }
+        return 0.0f;
+    }
+
+    public void SetTimeStep(double i_timeStep)
+    {
+        m_timeStep = i_timeStep;
+    }
+
+    public double GetTimeStep()
+    {
+        return m_timeStep;
+    }
+
+    public void SetFilePath(string i_filePath)
+    {
+        
+        if (m_currentStatus == LoadStatus.Ready)
+        {
+            // Reset all things before we reload
+
+            for (int i = 0; i < m_orbitManagers.Length; i++)
+            {
+                Destroy(m_orbitManagers[i]);
+            }
+
+            m_currentStatus = LoadStatus.WaitingForFilepath;
+            m_visualisationOffset = new Vector3 (0, 0, 0);
+            m_visualisationScale = new Vector3 (1, 1, 1);
+
+        }
+        m_localFilePath = i_filePath;
+        
+
     }
 }
