@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Visualiser Scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: Assets/Samples/Mixed Reality Toolkit Examples/2.5.1/Demos - HandTracking/Scenes/HandInteractionExamples.unity
+    guid: 3dd4a396b5225f8469b9a1eb608bfa57
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: e8ddfcd83c4a4b8458af4b4c7b6499bd,
       type: 2}
